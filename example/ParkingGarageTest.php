@@ -1,5 +1,12 @@
 <?php
+
+namespace example;
+
+use Car;
+use Motorcycle;
+use ParkingGarage;
 use PHPUnit\Framework\TestCase;
+use Van;
 
 require_once 'ParkingGarage.php';
 
@@ -15,9 +22,12 @@ require_once 'ParkingGarage.php';
  * A Van can only park on the ground floor.
 
  */
-class ParkingGarageTest extends TestCase {
 
-    public function testVehicleSizes() {
+class ParkingGarageTest extends TestCase
+{
+
+    public function testVehicleSizes()
+    {
         $car = new Car();
         $this->assertEquals(1.0, $car->getSize(), "Car size should be 1.0");
 
@@ -28,7 +38,8 @@ class ParkingGarageTest extends TestCase {
         $this->assertEquals(1.5, $van->getSize(), "Van size should be 1.5");
     }
 
-    public function testParkingFloorCapacity() {
+    public function testParkingFloorCapacity()
+    {
         $floor = new ParkingFloor(1, "Test Floor", 10);
         $this->assertTrue($floor->canPark(1.0), "Floor should be able to park a vehicle of size 1.0");
         $this->assertEquals(10, $floor->getFreeSpaces(), "Initial free spaces should be 10");
@@ -38,12 +49,14 @@ class ParkingGarageTest extends TestCase {
 
         $this->assertTrue($floor->canPark(9.0), "Floor should be able to park vehicles of total size 9.0");
         $floor->park(9.0);
-        $this->assertEquals(0, $floor->getFreeSpaces(), "Free spaces should be 0 after parking vehicles of total size 10.0");
+        $this->assertEquals(0, $floor->getFreeSpaces(),
+            "Free spaces should be 0 after parking vehicles of total size 10.0");
 
         $this->assertFalse($floor->canPark(1.0), "Floor should not be able to park a vehicle of size 1.0 if it's full");
     }
 
-    public function testParkingGarage() {
+    public function testParkingGarage()
+    {
         $floorData = [
             ['id' => 1, 'name' => 'First Floor', 'capacity' => 3],
             ['id' => 2, 'name' => 'Second Floor', 'capacity' => 3],
@@ -78,7 +91,8 @@ class ParkingGarageTest extends TestCase {
         $this->assertEquals("Sorry, no spaces left", $garage->parkVehicle($motorcycle));
     }
 
-    public function testFloorNameAndId() {
+    public function testFloorNameAndId()
+    {
         $floor = new ParkingFloor(1, "Test Floor", 10);
         $this->assertEquals(1, $floor->getId(), "Floor ID should be 1");
         $this->assertEquals("Test Floor", $floor->getName(), "Floor name should be 'Test Floor'");

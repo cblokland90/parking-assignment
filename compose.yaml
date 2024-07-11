@@ -1,8 +1,7 @@
 services:
   app:
     build:
-      dockerfile: ./docker/Dockerfile
-      context: ./
+      context: .
     tty: true
     restart: unless-stopped
     volumes:

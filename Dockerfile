@@ -8,7 +8,6 @@ RUN --mount=type=cache,sharing=locked,target=/var/cache/apk/ set -eux \
     bash \
     make
 
-
 # Easily install PHP extension in Docker containers | https://github.com/mlocati/docker-php-extension-installer
 COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensions /usr/local/bin/install-php-extensions
 RUN set -eux \
